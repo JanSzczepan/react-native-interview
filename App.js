@@ -11,6 +11,7 @@ import axios from 'axios'
 // JSON placeholder API doesn't provide information about data count, so in this case I have to hardcode it
 const COUNT = 199
 
+// ListItem component
 export const ListItem = ({ item }) => {
    const { title } = item
 
@@ -22,12 +23,14 @@ export const ListItem = ({ item }) => {
 }
 
 const App = () => {
+   // State for data and loading info
    const [toDoState, setToDoState] = useState({ data: [], isLoading: true })
 
    // Unfortunately API endpoint that you provided doesn't seem to be working so I used JSON placeholder API which provides similar data.
    const url = 'https://jsonplaceholder.typicode.com/todos'
    const API = axios.create({ baseURL: url })
 
+   // Function which fetches data from API endpoint
    const fetchData = async (start, limit) => {
       if (typeof start === 'number' && typeof limit === 'number' && start >= 0 && limit >= 1) {
          setToDoState((prevState) => ({ ...prevState, isLoading: true }))
@@ -38,6 +41,7 @@ const App = () => {
       }
    }
 
+   // Fetch initial data only when app loads for the first time
    useEffect(() => {
       if (!toDoState.data.length) {
          fetchData(0, 20)
