@@ -3,13 +3,16 @@
 
 // I am humbly aware that my app doesn't have TypeScript support. I am currently taking course from which I will learn TypeScript and I will finally be able to use it in my projects.
 
+// I coded this app in VSC on my local machine and test it on my phone. App works properly and has required functionalities, though it doesn't seem to be working in Codility IDE for the reasons that are unknown to me...
+
 import { useEffect, useState } from 'react'
 import { StatusBar } from 'react-native'
 import { SafeAreaView, StyleSheet, View, FlatList, ActivityIndicator, Text } from 'react-native'
 import axios from 'axios'
 
-// JSON placeholder API doesn't provide information about data count, so in this case I have to hardcode it
+// JSON placeholder API doesn't provide information about data count, so in this case I have to hard code it
 const COUNT = 199
+const REQUESTS_AMOUNT = 20
 
 // ListItem component
 export const ListItem = ({ item }) => {
@@ -44,7 +47,7 @@ const App = () => {
    // Fetch initial data only when app loads for the first time
    useEffect(() => {
       if (!toDoState.data.length) {
-         fetchData(0, 20)
+         fetchData(0, REQUESTS_AMOUNT)
       }
    }, [])
 
@@ -64,7 +67,7 @@ const App = () => {
                      />
                   )}
                   keyExtractor={(item) => item.id}
-                  onEndReached={() => !toDoState.isLoading && toDoState.data.length < COUNT && fetchData(toDoState.data.length + 1, 20)}
+                  onEndReached={() => !toDoState.isLoading && toDoState.data.length < COUNT && fetchData(toDoState.data.length + 1, REQUESTS_AMOUNT)}
                />
                {toDoState.isLoading && <ActivityIndicator />}
             </>
