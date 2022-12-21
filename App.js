@@ -5,7 +5,7 @@
 
 import { useEffect, useState } from 'react'
 import { StatusBar } from 'react-native'
-import { StyleSheet, View, FlatList, ActivityIndicator, Text } from 'react-native'
+import { SafeAreaView, StyleSheet, View, FlatList, ActivityIndicator, Text } from 'react-native'
 import axios from 'axios'
 
 // JSON placeholder API doesn't provide information about data count, so in this case I have to hardcode it
@@ -45,7 +45,7 @@ const App = () => {
    }, [])
 
    return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
          {toDoState.isLoading && !toDoState.data.length ? (
             <ActivityIndicator />
          ) : (
@@ -67,7 +67,7 @@ const App = () => {
          )}
 
          <StatusBar style="auto" />
-      </View>
+      </SafeAreaView>
    )
 }
 
